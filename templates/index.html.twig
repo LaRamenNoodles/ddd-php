@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h3><a href="{{path('create-new-car')}}">Add new Car</a></h3>
+<h3><a href="{{path('create-new-garage')}}">Add Garage</a></h3>
+
+<p style="font-weight: bold">Cars in parking lot: </p>
+
+<ul style="list-style: none">
+{% for car in cars %}
+    <li>
+        🚗 {{car.plateNumber}} <a href="{{path('move-car-into-garage', {carId: car.id})}}">Move into Garage</a>
+    </li>
+{% endfor %}
+</ul>
+
+<p style="font-weight: bold">Garages</p>
+<ul style="list-style: none">
+{% for garage in garages %}
+    <li>
+        Garage: #{{garage.id}}
+        {% if garage.car %}
+        <br>
+        <strong>Car: <span style="color: red">{{garage.car.plateNumber}}</span></strong>
+            {% if garage.isGatesOpen is same as true %} 
+                <a href="{{path('remove-car-from-garage', {garageId: garage.id})}}">Remove Car</a>
+            {% endif %}
+        {% endif %}
+        <br>
+        Is available: {% if garage.isAvailable is same as true %} ✅ {% else %} ❌ {% endif %}
+        <br>
+        Gates status: {% if garage.isGatesOpen is same as true %}✅ Open {% else %} ❌ Closed {% endif %}
+        <br>
+        Action: 
+            {% if garage.isGatesOpen is same as true %} 
+                <a style="text-decoration: none" href="{{path('close-garage-gate', {garageId: garage.id})}}">⬇️ Close Gates</a> 
+            {% else %}
+                <a style="text-decoration: none" href="{{path('open-garage-gate', {garageId: garage.id})}}">⬆️ Open Gates</a> 
+            {% endif %}
+
+            {% if garage.isAvailable is same as true %} 
+                <a style="text-decoration: none" href="{{path('make-garage-not-available', {garageId: garage.id})}}">❌ Make Not Available</a> 
+            {% else %}
+                <a style="text-decoration: none" href="{{path('make-garage-available', {garageId: garage.id})}}">✅ Make Available</a> 
+            {% endif %}
+    </li>
+    <hr>
+{% endfor %}
+</ul>
+
+{% endblock %}

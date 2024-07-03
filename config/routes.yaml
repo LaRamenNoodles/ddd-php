@@ -1,0 +1,39 @@
+garage-manager:
+    path: /
+    controller: App\CarRepairShop\Garage\Application\Controller\GarageManagerController
+
+customer-service:
+    path: /register/{firstname}/{lastname}/{carPlateNumber}
+    controller: App\CarRepairShop\CustomerService\Application\Controller\RegisterCarController
+
+create-new-garage:
+    path: /create-new-garage
+    controller: App\CarRepairShop\Garage\Application\Controller\CreateNewGarageController
+
+open-garage-gate:
+    path: /open-garage-gate/{garageId}
+    controller: App\CarRepairShop\Garage\Application\Controller\OpenGarageGateController
+
+close-garage-gate:
+    path: /close-garage-gate/{garageId}
+    controller: App\CarRepairShop\Garage\Application\Controller\CloseGarageGateController
+
+create-new-car:
+    path: /create-new-car
+    controller: App\CarRepairShop\Car\Application\Controller\CreateNewCarController
+
+move-car-into-garage:
+    path: /move-car-into-garage/{carId}
+    controller: App\CarRepairShop\Car\Application\Controller\MoveCarIntoGarageController
+
+remove-car-from-garage:
+    path: /remove-car-from-garage/{garageId}
+    controller: App\CarRepairShop\Garage\Application\Controller\RemoveCarFromGarageController
+
+make-garage-available:
+    path: /make-garage-available/{garageId}
+    controller: App\CarRepairShop\Garage\Application\Controller\MakeGarageAvailableController
+
+make-garage-not-available:
+    path: /make-garage-not-available/{garageId}
+    controller: App\CarRepairShop\Garage\Application\Controller\MakeGarageNotAvailableController
