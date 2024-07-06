@@ -18,16 +18,12 @@ class CustomerServiceRepository extends ServiceEntityRepository implements Custo
 
     public function findById(string $customerServiceId): ?CustomerService
     {
-        return $this->findById($customerServiceId);
+        return $this->find($customerServiceId);
     }
 
-    public function persist(CustomerService $customerService): void
+    public function save(CustomerService $customerService): void
     {
         $this->getEntityManager()->persist($customerService);
-    }
-
-    public function save(): void
-    {
         $this->getEntityManager()->flush();
     }
 }

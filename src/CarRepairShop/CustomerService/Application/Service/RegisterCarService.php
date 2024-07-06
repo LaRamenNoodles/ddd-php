@@ -12,9 +12,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 class RegisterCarService
 {
-    public function __construct(private readonly CustomerServiceRepositoryInterface $customerServiceRepository)
-    {
-    }
+    public function __construct(private readonly CustomerServiceRepositoryInterface $customerServiceRepository) {}
 
     public function __invoke(CreateCustomerServiceCommand $command): void
     {
@@ -24,7 +22,6 @@ class RegisterCarService
             carPlateNumber: $command->carPlateNumber,
         );
 
-        $this->customerServiceRepository->persist($customerService);
-        $this->customerServiceRepository->save();
+        $this->customerServiceRepository->save($customerService);
     }
 }

@@ -8,7 +8,6 @@ interface CustomerServiceRepositoryInterface
 {
     public function findById(string $customerServiceId): ?CustomerService;
 
-    public function persist(CustomerService $customerService): void;
+    public function save(CustomerService $customerService): void;
 
-    public function save(): void;
 }
