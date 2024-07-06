@@ -24,14 +24,20 @@ class GarageRepository extends ServiceEntityRepository implements GarageReposito
     public function findAllAndSortByDateDesc(): array
     {
         return $this->createQueryBuilder('g')
-        ->orderBy('g.createdAt', 'DESC')
-        ->getQuery()
-        ->getResult();
+            ->orderBy('g.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
-    public function findAvailableAndGatesOpen(): ?Garage
+    public function findAvailableAndGatesOpen(): ?array
     {
-        return $this->findOneBy(['isAvailable' => true, 'isGateOpen' => true]);
+        return $this->createQueryBuilder('g')
+            ->where('g.isAvailable = true')
+            ->andWhere('g.isGateOpen = true')
+            ->orderBy('g.createdAt', 'DESC')
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getResult();
     }
 
     public function save(Garage $garage): void

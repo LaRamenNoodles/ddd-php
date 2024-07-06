@@ -18,17 +18,18 @@ class MoveCarIntoGarageHandler
         private readonly CarRepositoryInterface $carRepository,
         private readonly GarageRepositoryInterface $garageRepository,
         private readonly MessageBusInterface $bus,
-    ) {
-    }
+    ) {}
 
     public function __invoke(MoveCarIntoGarageCommand $command): void
     {
         $car = $this->carRepository->findById($command->carId);
         $garage = $this->garageRepository->findAvailableAndGatesOpen();
 
-        if (!$garage) {
+        if (!$garage || empty($garage)) {
             throw new \Exception('No available garages at the moment');
         }
+
+        $garage = $garage[0];
 
         $car->moveInToGarage($garage);
 
